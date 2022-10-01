@@ -4,6 +4,7 @@ const port = 3000
 
 const exphbs = require('express-handlebars')
 const restaurantList = require('./restaurant.json')
+let hint = "請輸入餐廳、分類"
 
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
@@ -13,7 +14,8 @@ app.use(express.static('public'))
 
 
 app.get('/', (req, res) => {
-  res.render('index', { restaurant: restaurantList.results })
+  console.log(hint)
+  res.render('index', { restaurant: restaurantList.results, hint: hint })
 })
 
 app.get('/restaurants/:restaurant_id', (req, res) => {
@@ -22,12 +24,22 @@ app.get('/restaurants/:restaurant_id', (req, res) => {
 })
 
 app.get('/search', (req, res) => {
-  const keyword = req.query.keyword
+  if (!req.query.keyword) {
+    return res.redirect("/")
+  }
+
+  let keyword = req.query.keyword.trim()
   const restaurants = restaurantList.results.filter(restaurant => {
-    console.log(restaurant.name.toLowerCase())
     return restaurant.name.toLowerCase().includes(keyword.toLowerCase())
   })
-  res.render('index', { restaurant: restaurants, keyword: keyword })
+  if (restaurants.length === 0) {
+    keyword = ""
+    hint = "查無餐廳, 請重新輸入"
+  }
+
+  console.log(hint)
+
+  res.render('index', { restaurant: restaurants, keyword: keyword, hint: hint })
 })
 
 app.listen(port, () => {
