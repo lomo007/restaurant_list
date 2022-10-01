@@ -4,7 +4,6 @@ const port = 3000
 
 const exphbs = require('express-handlebars')
 const restaurantList = require('./restaurant.json')
-let hint = "請輸入餐廳、分類"
 
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
@@ -14,7 +13,7 @@ app.use(express.static('public'))
 
 
 app.get('/', (req, res) => {
-  console.log(hint)
+  let hint = "請輸入餐廳、分類"
   res.render('index', { restaurant: restaurantList.results, hint: hint })
 })
 
