@@ -99,3 +99,14 @@ header {
   }
 
 }
+
+.error {
+  border: 1px solid red;
+  box-shadow: 0px 0px 2px red;
+}
+
+.error::placeholder {
+  color: red;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
