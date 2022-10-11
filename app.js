@@ -9,6 +9,7 @@ const restaurantList = require('./restaurant.json')
 const mongoose = require('mongoose')
 mongoose.connect(process.env.MONGODB_URI_R, { useNewUrlParser: true, useUnifiedTopology: true })
 
+console.log(process.env.MONGODB_URI_R)
 //取得資料庫連線狀態
 const db = mongoose.connection
 
