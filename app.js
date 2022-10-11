@@ -4,7 +4,6 @@ const port = 3000
 
 const exphbs = require('express-handlebars')
 const Restaurant = require('./models/restaurant')
-// const restaurantList = require('./restaurant.json')
 
 //載入mongoose並連線到MONGODB
 const mongoose = require('mongoose')
@@ -14,6 +13,7 @@ mongoose.connect(process.env.MONGODB_URI_R, { useNewUrlParser: true, useUnifiedT
 const db = mongoose.connection
 
 const bodyParser = require('body-parser')
+const restaurant = require('./models/restaurant')
 
 let hint = "請輸入餐廳、分類"
 let hintError = "查無餐廳, 請重新輸入"
@@ -47,6 +47,7 @@ app.get('/restaurants/new', (req, res) => {
 })
 
 app.post('/restaurants', (req, res) => {
+  const id = req.body.id
   const name = req.body.name
   const name_en = req.body.name_en
   const category = req.body.category
@@ -56,14 +57,17 @@ app.post('/restaurants', (req, res) => {
   const google_map = req.body.google_map
   const rating = req.body.rating
   const description = req.body.description
-  return Restaurant.create({ name, name_en, category, image, location, phone, google_map, rating, description })
+  return Restaurant.create({ id, name, name_en, category, image, location, phone, google_map, rating, description })
     .then(() => res.redirect('/'))
     .catch(error => console.error(error))
 })
 
-app.get('/restaurants/:restaurant_id', (req, res) => {
-  const restaurant = restaurantList.results.find(restaurant => restaurant.id.toString() === req.params.restaurant_id)
-  res.render('show', { restaurant: restaurant })
+app.get('/restaurants/:id', (req, res) => {
+  const id = req.params.id
+  return Restaurant.findById(id)
+    .lean()
+    .then((restaurant) => res.render('show', { restaurant }))
+    .catch(error => console.error(error))
 })
 
 app.get('/search', (req, res) => {
