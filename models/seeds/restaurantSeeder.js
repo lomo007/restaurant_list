@@ -17,8 +17,9 @@ db.once('open', () => {
     Restaurant.create({
       id: restaurant.id,
       name: restaurant.name,
-      name_en: restaurant.category,
-      Image: restaurant.image,
+      name_en: restaurant.name_en,
+      category: restaurant.category,
+      image: restaurant.image,
       location: restaurant.location,
       phone: restaurant.phone,
       google_map: restaurant.google_map,

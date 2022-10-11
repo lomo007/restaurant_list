@@ -12,7 +12,7 @@
           </div>
         </div>
         <div class="d-flex justify-content-end">
-          <button class="btn btn-light btn-sm mt-2">新增餐廳</button>
+          <button class="btn btn-light btn-sm mt-2"><a href="./restaurants/new">新增餐廳</a></button>
         </div>
       </form>
     </div>
@@ -23,7 +23,7 @@
 <div class="container mt-5">
   <div class="col-9 mx-auto">
     <div class="d-flex flex-wrap ">
-      {{#each restaurant}}
+      {{#each restaurants}}
       <div class="col-4 p-3">
         <div class="card">
           <img class="card-img-top" src="{{this.image}}" alt="{{this.name_en}}{{this.name}}">

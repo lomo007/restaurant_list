@@ -1,0 +1,46 @@
+<form action="/restaurants" method="POST" class="container m-5">
+  <div class="form-floating mb-3">
+    <input type="text" class="form-control" placeholder="餐廳中文名稱" name="name">
+    <label for="floatingInput">餐廳中文名稱</label>
+  </div>
+  <div class="form-floating mb-3">
+    <input type="text" class="form-control" placeholder="餐廳英文名稱" name="name_en">
+    <label for="floatingInput">餐廳英文名稱</label>
+  </div>
+  <div class="form-floating mb-3">
+    <select class="form-select" aria-label="Default select example" name="category">
+      <option>日式</option>
+      <option>美式</option>
+      <option>義式</option>
+      <option>法式</option>
+      <option>咖啡</option>
+      <option>酒吧</option>
+    </select>
+    <label for="floatingInput">餐廳類別</label>
+  </div>
+  <div class="form-floating mb-3">
+    <input type="text" class="form-control" placeholder="台北市羅斯福路三段 283 巷 17 號" name="image">
+    <label for="floatingInput">餐廳照片(https://assets-lighthouse.s3.amazonaws.com/uploads/image/file/5629/03.jpg)</label>
+  </div>
+  <div class="form-floating mb-3">
+    <input type="text" class="form-control" placeholder="台北市羅斯福路三段 283 巷 17 號" name="location">
+    <label for="floatingInput">餐廳地址(台北市羅斯福路三段 283 巷 17 號)</label>
+  </div>
+  <div class="form-floating mb-3">
+    <input type="text" class="form-control" placeholder="02 2363 8009" name="phone">
+    <label for="floatingInput">餐廳電話(02 2363 8009)</label>
+  </div>
+  <div class="form-floating mb-3">
+    <input type="text" class="form-control" placeholder="" name="google_map">
+    <label for="floatingInput">餐廳地圖</label>
+  </div>
+  <div class="form-floating mb-3">
+    <input type="text" class="form-control" placeholder="4.1" name="rating">
+    <label for="floatingInput">餐廳評價(5)</label>
+  </div>
+  <div class="form-floating mb-3">
+    <textarea type="text" class="form-control" placeholder="鰻魚、鰻魚飯、真空鰻魚..." name="description"></textarea>
+    <label for="floatingInput">餐廳描述(鰻魚、鰻魚飯、真空鰻魚...)</label>
+  </div>
+  <button type="submit" class="btn btn-primary mt-2">Create</button>
+</form>
