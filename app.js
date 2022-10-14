@@ -13,7 +13,6 @@ mongoose.connect(process.env.MONGODB_URI_R, { useNewUrlParser: true, useUnifiedT
 const db = mongoose.connection
 
 const bodyParser = require('body-parser')
-const restaurant = require('./models/restaurant')
 
 let hint = "請輸入餐廳、分類"
 let hintError = "查無餐廳, 請重新輸入"
@@ -106,25 +105,24 @@ app.get('/restaurants/:id/edit', (req, res) => {
     .catch(error => console.error(error))
 })
 
+app.post('/restaurants/:id/delete', (req, res) => {
+  const id = req.params.id
+  return Restaurant.findById(id)
+    .then((restaurant) => restaurant.remove())
+    .then(() => res.redirect('/'))
+    .catch(error => console.error(error))
+})
+
 app.get('/search', (req, res) => {
   let error = ''
-
   if (!req.query.keyword) {
     return res.redirect("/")
   }
-
-  let keyword = req.query.keyword.trim()
-  const restaurants = restaurantList.results.filter(restaurant => {
-    return restaurant.name.toLowerCase().includes(keyword.toLowerCase()) || restaurant.category.includes(keyword)
-  })
-
-  if (restaurants.length === 0) {
-    keyword = ''
-    hint = hintError
-    error = 'error'
-  }
-
-  res.render('index', { restaurant: restaurants, keyword: keyword, hint: hint, error: error })
+  Restaurant.find({ name: 'Sa' }).exec();
+  return Restaurant.find({ "name": req.query.keyword })
+    .lean()
+    .then((reataurant) => res.render('index', { reataurant }))
+    .catch(error => console.error(error))
 })
 
 app.listen(port, () => {
