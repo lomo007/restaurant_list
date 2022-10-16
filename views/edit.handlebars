@@ -1,6 +1,6 @@
 <form action="/restaurants/{{restaurant._id}}/edit" method="POST" class="container m-5">
   <div class="form-floating mb-3">
-    <input type="text" class="form-control" placeholder="餐廳中文名稱" name="name" value="{{restaurant.name}}">
+    <input type="text" class="form-control" placeholder="餐廳中文名稱" name="name" value="{{restaurant.name}}" required>
     <label for="floatingInput">餐廳中文名稱</label>
   </div>
   <div class="form-floating mb-3">
@@ -8,15 +8,8 @@
     <label for="floatingInput">餐廳英文名稱</label>
   </div>
   <div class="form-floating mb-3">
-    <select class="form-select" aria-label="Default select example" name="category" value="{{restaurant.category}}">
-      <option>日式</option>
-      <option>美式</option>
-      <option>義式</option>
-      <option>法式</option>
-      <option>咖啡</option>
-      <option>酒吧</option>
-    </select>
-    <label for="floatingInput">餐廳類別</label>
+    <input type="text" class="form-control" placeholder="餐廳類別" name="category" value="{{restaurant.category}}">
+    <label for="floatingInput">餐廳類別(中東料理/義式餐廳/美式/咖啡/酒吧)</label>
   </div>
   <div class="form-floating mb-3">
     <input type="text" class="form-control" placeholder="台北市羅斯福路三段 283 巷 17 號" name="image"
@@ -41,8 +34,8 @@
     <label for="floatingInput">餐廳評價(5)</label>
   </div>
   <div class="form-floating mb-3">
-    <textarea type="text" class="form-control" placeholder="鰻魚、鰻魚飯、真空鰻魚..." name="description"
-      value="{{restaurant.description}}"></textarea>
+    <textarea type="text" class="form-control" placeholder="鰻魚、鰻魚飯、真空鰻魚..."
+      name="description">{{restaurant.description}}</textarea>
     <label for="floatingInput">餐廳描述(鰻魚、鰻魚飯、真空鰻魚...)</label>
   </div>
   <button type="submit" class="btn btn-primary mt-2">Save</button>

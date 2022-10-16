@@ -77,7 +77,7 @@ app.get('/restaurants/:id/edit', (req, res) => {
     .catch(error => console.error(error))
 })
 
-app.get('/restaurants/:id/edit', (req, res) => {
+app.post('/restaurants/:id/edit', (req, res) => {
   const id = req.params.id
   const name = req.body.name
   const name_en = req.body.name_en
