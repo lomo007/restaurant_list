@@ -118,11 +118,21 @@ app.get('/search', (req, res) => {
   if (!req.query.keyword) {
     return res.redirect("/")
   }
-  Restaurant.find({ name: 'Sa' }).exec();
-  return Restaurant.find({ "name": req.query.keyword })
+  const keyword = req.query.keyword.trim()
+  const reg = new RegExp(keyword, 'i')  //不區分大小寫
+  return restaurants = Restaurant.find(    //關鍵字模糊搜尋
+    { name: { $regex: reg } }, function (err, doc) {
+      if (err) {
+        console.log(err)
+      } else {
+        console.log(doc)
+      }
+    }
+  )
     .lean()
-    .then((reataurant) => res.render('index', { reataurant }))
+    .then((restaurants) => res.render('index', { restaurants, keyword }))  //大括弧內的陣列依序輸出
     .catch(error => console.error(error))
+
 })
 
 app.listen(port, () => {
