@@ -40,7 +40,7 @@
     <div class="d-flex flex-warp justify-content-sm-center">
       <a class="btn btn-primary btn-sm mb-5" href="/restaurants/{{ restaurant._id }}/edit">edit</a>
       <a class="btn btn-light btn-sm mb-5" href="/">Back</a>
-      <form action="/restaurants/{{restaurant._id}}/delete" method="POST">
+      <form action="/restaurants/{{restaurant._id}}?methhod=DELETE" method="POST">
         <button type="submit" class="btn btn-danger btn-sm">Delete</button>
       </form>
     </div>

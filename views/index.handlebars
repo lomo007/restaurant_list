@@ -53,7 +53,7 @@
           <footer class="d-flex justify-content-end bg-light p-2">
             <a href="./restaurants/{{this._id}}/edit"><button class="btn btn-warning btn-sm m-1">Edit</button></a>
             <a href="./restaurants/{{this._id}}"><button class="btn btn-warning btn-sm  m-1">Detail</button></a>
-            <form action="./restaurants/{{this._id}}/delete" method="POST">
+            <form action="./restaurants/{{this._id}}?_method=DELETE" method="POST">
               <button type="submit" class="btn btn-danger btn-sm  m-1">Delete</button>
             </form>
           </footer>

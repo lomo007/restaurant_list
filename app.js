@@ -13,6 +13,8 @@ mongoose.connect(process.env.MONGODB_URI_R, { useNewUrlParser: true, useUnifiedT
 const db = mongoose.connection
 
 const bodyParser = require('body-parser')
+// 載入 method-override
+const methodOverride = require('method-override')
 
 
 let hint = "請輸入餐廳、分類"
@@ -32,6 +34,9 @@ app.set('view engine', 'handlebars')
 
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(express.static('public'))
+
+// 設定每一筆請求都會透過 methodOverride 進行前置處理
+app.use(methodOverride('_method'))
 
 //渲染現有資料到首頁
 app.get('/', (req, res) => {
@@ -80,39 +85,43 @@ app.get('/restaurants/:id/edit', (req, res) => {
 })
 
 app.post('/restaurants/:id/edit', (req, res) => {
-  const id = req.params.id
-  const name = req.body.name
-  const name_en = req.body.name_en
-  const category = req.body.category
-  const image = req.body.image
-  const location = req.body.location
-  const phone = req.body.phone
-  const google_map = req.body.google_map
-  const rating = req.body.rating
-  const description = req.body.description
-  return Restaurant.findById(id)
-    .then((restaurant) => {
-      restaurant.name = name
-      restaurant.name_en = name_en
-      restaurant.category = category
-      restaurant.image = image
-      restaurant.location = location
-      restaurant.phone = phone
-      restaurant.google_map = google_map
-      restaurant.rating = rating
-      restaurant.description = description
-      return restaurant.save()
-    })
-    .then(() => res.redirect(`/restaurants/${id}`))
-    .catch(error => console.error(error))
+  app.put('/restaurants/:id', (req, res) => {
+    const id = req.params.id
+    const name = req.body.name
+    const name_en = req.body.name_en
+    const category = req.body.category
+    const image = req.body.image
+    const location = req.body.location
+    const phone = req.body.phone
+    const google_map = req.body.google_map
+    const rating = req.body.rating
+    const description = req.body.description
+    return Restaurant.findById(id)
+      .then((restaurant) => {
+        restaurant.name = name
+        restaurant.name_en = name_en
+        restaurant.category = category
+        restaurant.image = image
+        restaurant.location = location
+        restaurant.phone = phone
+        restaurant.google_map = google_map
+        restaurant.rating = rating
+        restaurant.description = description
+        return restaurant.save()
+      })
+      .then(() => res.redirect(`/restaurants/${id}`))
+      .catch(error => console.error(error))
+  })
 })
 
 app.post('/restaurants/:id/delete', (req, res) => {
-  const id = req.params.id
-  return Restaurant.findById(id)
-    .then((restaurant) => restaurant.remove())
-    .then(() => res.redirect('/'))
-    .catch(error => console.error(error))
+  app.delete('/restaurants/:id', (req, res) => {
+    const id = req.params.id
+    return Restaurant.findById(id)
+      .then((restaurant) => restaurant.remove())
+      .then(() => res.redirect('/'))
+      .catch(error => console.error(error))
+  })
 })
 
 app.get('/search', (req, res) => {
