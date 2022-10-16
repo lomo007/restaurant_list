@@ -1,6 +1,6 @@
 # 餐廳清單
 
-![Index page about Restaurant List](./public/images/restaurant_list2.png)
+![Index page about Restaurant List](./public/images/restaurant_list3.png)
 
 ## 介紹
 
