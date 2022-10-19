@@ -46,6 +46,8 @@
 - Express-Handlebars 3.0.0
 - Bootstrap 5.0.2
 - Font-awesome 6.2.0
-
+- body-parser 1.20.1
+- method-override 3.0.0
+- mongoose 5.0.7
 
 
