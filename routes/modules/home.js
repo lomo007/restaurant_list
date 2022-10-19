@@ -3,6 +3,7 @@ const express = require('express')
 const router = express.Router()
 // 引用 model
 const Restaurant = require('../../models/restaurant')
+const title = ['A to Z', 'Z to A', '類別', '地區']
 
 //渲染現有資料到首頁
 router.get('/', (req, res) => {
@@ -20,37 +21,49 @@ router.get('/search', (req, res) => {
   }
   const keyword = req.query.keyword.trim()
   const reg = new RegExp(keyword, 'i')  //不區分大小寫
-  return restaurants = Restaurant.find(    //關鍵字模糊搜尋
-    { name: { $regex: reg } }, function (err, doc) {
-      if (err) {
-        console.log(err)
-      } else {
-        console.log(doc)
-      }
-    }
-  )
-    .lean()
-    .then((restaurants) => res.render('index', { restaurants, keyword }))  //大括弧內的陣列依序輸出
-    .catch(error => console.error(error))
-
-})
-
-router.get('/list', (req, res) => {
-  const { keyword, sort, order, title } = req.query
-  return Restaurant.find()
-    .sort({ [sort]: order })
-    .lean()
+  Restaurant.find(                     //關鍵字模糊搜尋
+    { $or: [{ category: { $regex: reg } }, { name: { $regex: reg } }] } //$or $and 多種屬性查詢寫法
+  ).lean()
     .then(restaurants => {
-      // 先打包所有restaurants再過濾包含keyword的list
-      const filterRestaurants = restaurants.filter(restaurant => restaurant.name.toLowerCase().includes(keyword.toLowerCase()) || restaurant.category.includes(keyword))
-
-      // render搜尋結果，若無符合結果render無符合頁面
-      if (filterRestaurants.length) {
-        res.render('index', { restaurants: filterRestaurants, keyword, title })
-      } else {
+      if (!restaurants.length) {
         res.render('noMatchCase', { keyword })
+      } else {
+        res.render('index', { restaurants, keyword }  //大括弧內的陣列依序輸出
+        )
       }
     })
+})
+
+router.get('/list/1', (req, res) => {  //把資料庫排序 然後渲染
+  Restaurant.find()
+    .lean()
+    .sort({ name: 'asc' })
+    .then(restaurants => res.render('index', { restaurants, title: title[0] }))
+    .catch(error => console.error(error))
+})
+
+router.get('/list/2', (req, res) => {  //把資料庫排序 然後渲染
+  Restaurant.find()
+    .lean()
+    .sort({ name: 'desc' })
+    .then(restaurants => res.render('index', { restaurants, title: title[1] }))
+    .catch(error => console.error(error))
+})
+
+router.get('/list/3', (req, res) => {  //把資料庫排序 然後渲染
+  Restaurant.find()
+    .lean()
+    .sort({ category: 'asc' })
+    .then(restaurants => res.render('index', { restaurants, title: title[2] }))
+    .catch(error => console.error(error))
+})
+
+
+router.get('/list/4', (req, res) => {  //把資料庫排序 然後渲染
+  Restaurant.find()
+    .lean()
+    .sort({ locatoin: 'asc' })
+    .then(restaurants => res.render('index', { restaurants, title: title[3] }))
     .catch(error => console.error(error))
 })
 

@@ -16,23 +16,26 @@
   </div>
 </div>
 
+
+
+{{!-- 排序方法 --}}
 <div class="container d-flex justify-content-end">
-  <div id="sortSelector">
+  <div class="sortSelector">
     <div class="dropdown">
-      <a class="btn btn-outline-danger dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-        data-bs-toggle="dropdown" aria-expanded="false">
-        排序方法{{#if title}}({{title}}){{/if}}
+      <a class="btn btn-outline-danger dropdown-toggle m-3" href="#" role="button" id="dropdownMenuLink"
+        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> {{!--data-bs-toggle 摺疊選單 --}}
+        排序{{#if title}}{{/if}}
       </a>
       <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-        <li><a class="dropdown-item" href="/list?keyword={{ keyword }}&sort=name&order=asc&title=A->Z">A to Z</a></li>
-        <li><a class="dropdown-item" href="/list?keyword={{ keyword }}&sort=name&order=desc&title=Z->A">Z to A</a>
-        </li>
-        <li><a class="dropdown-item" href="/list?keyword={{ keyword }}&sort=category&order=asc&title=類別">類別</a></li>
-        <li><a class="dropdown-item" href="/list?keyword={{ keyword }}&sort=location&order=asc&title=地區">地區</a></li>
+        <li><a class="dropdown-item" href="/list/1">A to Z</a></li>
+        <li><a class="dropdown-item" href="/list/2">Z to A</a></li>
+        <li><a class="dropdown-item" href="/list/3">類別</a></li>
+        <li><a class="dropdown-item" href="/list/4">地區</a></li>
       </ul>
     </div>
   </div>
 </div>
+
 
 <!-- restaurant list -->
 <div class="container mt-5">
