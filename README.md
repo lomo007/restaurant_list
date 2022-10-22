@@ -11,6 +11,10 @@
 - 查看所有的餐廳
 - 搜尋欄搜尋餐廳
 - 瀏覽餐廳詳細資訊
+- 逐一新增餐廳資訊
+- 逐一修改餐廳資訊
+- 逐一刪除目標餐廳
+- 排序所有的餐廳
 
 ## 開始使用
 
@@ -19,19 +23,35 @@
 3. 在本地開啟之後，透過終端機進入資料夾，輸入:
 
    ```bash
-   npm install
+   cd restaurant_list
    ```
 
-4. 安裝完畢後，繼續輸入:
+4. 進入資料夾後，輸入'npm run seed' 載入種子資料:
 
    ```bash
-   npm run start
+   npm run seed
    ```
 
-5. 若看見此行訊息則代表順利運行，打開瀏覽器進入到以下網址
+5. 若看見'mongodb connected'表示伺服器連線成功。若看見'done'表示種子資料載入成功。
+   輸入'ctrl + c'停止:
+   
+   ```bash
+   mongodb connected!
+   mongodb connected!
+   done
+   ```
+
+4. 接著輸入'npm run dev'執行渲染畫面:
 
    ```bash
-   Listening on http://localhost:3000
+   npm run dev
+   ```
+
+5. 若看見'Express is listening on http://localhost:3000'，則代表順利運行打開瀏覽器進入到以下網址:
+
+   ```bash
+   http://localhost:3000
+   ```
 
 6. 若欲暫停使用
 

@@ -27,10 +27,10 @@
         排序{{#if title}}({{title}}){{/if}}
       </a>
       <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-        <li><a class="dropdown-item" href="/list/1">A to Z</a></li>
-        <li><a class="dropdown-item" href="/list/2">Z to A</a></li>
-        <li><a class="dropdown-item" href="/list/3">類別</a></li>
-        <li><a class="dropdown-item" href="/list/4">地區</a></li>
+        <li><a class="dropdown-item" href="/list?sort=name&order=asc&title=AtoZ">A to Z</a></li>
+        <li><a class="dropdown-item" href="/list?sort=name&order=desc&title=ZtoA">Z to A</a></li>
+        <li><a class="dropdown-item" href="/list?sort=category&order=asc&title=類別">類別</a></li>
+        <li><a class="dropdown-item" href="/list?sort=location&order=asc&title=地區">地區</a></li>
       </ul>
     </div>
   </div>
@@ -61,7 +61,8 @@
             </form>
           </footer>
         </div>
-      </div>{{/each}}
+      </div>
+      {{/each}}
     </div>
   </div>
 </div>

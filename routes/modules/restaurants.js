@@ -9,18 +9,9 @@ router.get('/new', (req, res) => {
   return res.render('new')
 })
 
+//* req..body 和 restaurant schema屬性依樣 , req.body可以當作參數直接塞給 model.create
 router.post('/', (req, res) => {
-  const id = req.body.id
-  const name = req.body.name
-  const name_en = req.body.name_en
-  const category = req.body.category
-  const image = req.body.image
-  const location = req.body.location
-  const phone = req.body.phone
-  const google_map = req.body.google_map
-  const rating = req.body.rating
-  const description = req.body.description
-  return Restaurant.create({ id, name, name_en, category, image, location, phone, google_map, rating, description })
+  return Restaurant.create(req.body)   //* 
     .then(() => res.redirect('/'))
     .catch(error => console.error(error))
 })
@@ -41,28 +32,12 @@ router.get('/:id/edit', (req, res) => {
     .catch(error => console.error(error))
 })
 
+//* Object.assign 將 req.body 和restaurant 合併指派
 router.put('/:id', (req, res) => {
   const id = req.params.id
-  const name = req.body.name
-  const name_en = req.body.name_en
-  const category = req.body.category
-  const image = req.body.image
-  const location = req.body.location
-  const phone = req.body.phone
-  const google_map = req.body.google_map
-  const rating = req.body.rating
-  const description = req.body.description
   return Restaurant.findById(id)
     .then((restaurant) => {
-      restaurant.name = name
-      restaurant.name_en = name_en
-      restaurant.category = category
-      restaurant.image = image
-      restaurant.location = location
-      restaurant.phone = phone
-      restaurant.google_map = google_map
-      restaurant.rating = rating
-      restaurant.description = description
+      restaurant = Object.assign(restaurant, req.body)  //*  
       return restaurant.save()
     })
     .then(() => res.redirect(`/restaurants/${id}`))
@@ -76,8 +51,6 @@ router.delete('/:id', (req, res) => {
     .then(() => res.redirect('/'))
     .catch(error => console.error(error))
 })
-
-
 
 
 // 匯出路由模組
