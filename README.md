@@ -1,6 +1,6 @@
 # 餐廳清單
 
-![Index page about Restaurant List](./public/images/restaurant_list3.png)
+![Index page about Restaurant List](./public/images/restaurant_list4.png)
 
 ## 介紹
 
@@ -47,7 +47,8 @@
    npm run dev
    ```
 
-5. 若看見'Express is listening on http://localhost:3000'，則代表順利運行打開瀏覽器進入到以下網址:
+5. 若看見"Express is listening on http://localhost:3000"
+   則代表順利運行打開瀏覽器進入到以下網址:
 
    ```bash
    http://localhost:3000
