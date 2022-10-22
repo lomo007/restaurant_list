@@ -41,10 +41,10 @@
    done
    ```
 
-4. 接著輸入'npm run dev'執行渲染畫面:
+4. 接著輸入'npm run start'執行渲染畫面:
 
    ```bash
-   npm run dev
+   npm run start
    ```
 
 5. 若看見"Express is listening on http://localhost:3000"
