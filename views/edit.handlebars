@@ -1,4 +1,4 @@
-<form action="/restaurants/{{restaurant._id}}/edit" method="POST" class="container m-5">
+<form action="/restaurants/{{restaurant._id}}?_method=PUT" method="POST" class="container m-5">
   <div class="form-floating mb-3">
     <input type="text" class="form-control" placeholder="餐廳中文名稱" name="name" value="{{restaurant.name}}" required>
     <label for="floatingInput">餐廳中文名稱</label>

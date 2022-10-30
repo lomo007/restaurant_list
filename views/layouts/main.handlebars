@@ -6,9 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Restaurant List</title>
-  <link rel="stylesheet" href="/stylesheets/bootstrap.css">
   <link rel="stylesheet" href="/stylesheets/style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/css/all.min.css" />
+  <script src="https://kit.fontawesome.com/f0532e1387.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="/stylesheets/bootstrap.css">
 </head>
 
 <body>
@@ -21,18 +22,27 @@
             width="30" height="30" class="d-inline-block align-top" alt="我的餐廳清單">
           我的餐廳清單
         </a>
+        <div class="d-flex justify-content-end">
+          <a href="./restaurants/new" class="btn btn-warning btn-sm m-2">Create</a>
+        </div>
       </div>
     </nav>
 
     <div class="banner"></div>
+
   </header>
 
   {{{body}}}
 
   <script src="/javascripts/popper.js"></script>
   <script src="/javascripts/bootstrap.js"></script>
-  <script src="https://kit.fontawesome.com/39d206cfad.js" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $(".dropdown-menu").dropdown();
+    })
+
+  </script>
+
 </body>
 
 </html>

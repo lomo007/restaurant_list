@@ -11,17 +11,35 @@
             <button class="btn btn-major" type="submit" id="search-button"><i class="fas fa-search"></i></button>
           </div>
         </div>
-        <div class="d-flex justify-content-end">
-          <a href="./restaurants/new" class="btn btn-light btn-sm mt-2">新增餐廳</a>
-        </div>
       </form>
     </div>
   </div>
 </div>
 
+
+
+{{!-- 排序方法 --}}
+<div class="container d-flex justify-content-end">
+  <div class="sortSelector">
+    <div class="dropdown">
+      <a class="btn btn-outline-danger dropdown-toggle m-3" href="#" role="button" id="dropdownMenuLink"
+        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> {{!--data-bs-toggle 摺疊選單 --}}
+        排序{{#if title}}({{title}}){{/if}}
+      </a>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        <li><a class="dropdown-item" href="/list?sort=name&order=asc&title=AtoZ">A to Z</a></li>
+        <li><a class="dropdown-item" href="/list?sort=name&order=desc&title=ZtoA">Z to A</a></li>
+        <li><a class="dropdown-item" href="/list?sort=category&order=asc&title=類別">類別</a></li>
+        <li><a class="dropdown-item" href="/list?sort=location&order=asc&title=地區">地區</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
 <!-- restaurant list -->
 <div class="container mt-5">
-  <div class="col-9 mx-auto">
+  <div class="col-9 mx-auto ">
     <div class="d-flex flex-wrap ">
       {{#each restaurants}}
       <div class="col-4 p-3">
@@ -30,23 +48,21 @@
           <div class="card-body p-3">
             <h6 class="card-title mb-1">{{this.name}}</h6>
             <div class="restaurant-category mb-1">
-              <i class="fas fa-utensils pr-2"></i> {{this.category}}
+              <i class="fas fa-utensils pl-2"></i> {{this.category}}
             </div>
-            <span class="badge badge-pill badge-danger font-weight-normal">
-              {{this.rating}}
-              <i class="fas fa-star fa-xs"></i>
-            </span>
-
+            <h6><span class="badge bg-danger text-light">{{this.rating}}</span><i
+                class="fas fa-star fa-xs text-danger"></i></h6>
           </div>
-          <footer class="d-flex justify-content-end mt-2 bg-dark p-2">
-            <a href="./restaurants/{{this._id}}/edit" class="badge p-2 mr-2"><span>Edit</span></a>
-            <a href="./restaurants/{{this._id}}" class="badge p-2 mr-2"><span>Detail</span></a>
-            <form action="./restaurants/{{this._id}}/delete" method="POST">
-              <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+          <footer class="d-flex justify-content-end bg-light p-2">
+            <a href="./restaurants/{{this._id}}/edit"><button class="btn btn-warning btn-sm m-1">Edit</button></a>
+            <a href="./restaurants/{{this._id}}"><button class="btn btn-warning btn-sm  m-1">Detail</button></a>
+            <form action="./restaurants/{{this._id}}?_method=DELETE" method="POST">
+              <button type="submit" class="btn btn-danger btn-sm  m-1">Delete</button>
             </form>
           </footer>
         </div>
-      </div>{{/each}}
+      </div>
+      {{/each}}
     </div>
   </div>
 </div>
