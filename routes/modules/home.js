@@ -7,7 +7,8 @@ const Restaurant = require('../../models/restaurant')
 
 // 渲染現有資料到首頁  //*1 根據 _id 升冪排序
 router.get('/', (req, res) => {
-  Restaurant.find()
+  const userId = req.user._id
+  Restaurant.find({ userId })
     .lean()
     .sort({ _id: 'asc' })    //*1
     .then(restaurants => res.render('index', { restaurants }))
