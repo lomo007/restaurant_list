@@ -40,7 +40,8 @@ router.get('/search', (req, res) => {
 //* 用 query string 的方式帶入參數
 router.get('/list', (req, res) => {
   const { sort, order, title } = req.query   //* 
-  Restaurant.find()
+  const userId = req.user._id
+  Restaurant.find({ userId })
     .lean()
     .sort({ [sort]: order })
     .then(restaurants => res.render('index', { restaurants, title }))

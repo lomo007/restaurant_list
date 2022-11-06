@@ -12,10 +12,10 @@ const restaurantSchema = new Schema({
   rating: Number,
   description: String,
   userId: {
-    type: Schema.Types.ObjectId, // 定義 userId 這個項目是一個 ObjectId，也就是它會連向另一個資料物件
-    ref: 'User', // 參考對象是 User model
+    type: Schema.Types.ObjectId,
+    ref: 'User',
     index: true,
-    required: true // 確保每一筆  紀錄都一定會對應到某個 user。
+    required: true
   }
 })
 module.exports = mongoose.model('Restaurant', restaurantSchema)

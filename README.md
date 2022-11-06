@@ -15,6 +15,7 @@
 - 逐一修改餐廳資訊
 - 逐一刪除目標餐廳
 - 排序所有的餐廳
+- 會員登入
 
 ## 開始使用
 
@@ -33,11 +34,8 @@
    ```
 
 5. 若看見'mongodb connected'表示伺服器連線成功。若看見'done'表示種子資料載入成功。
-   輸入'ctrl + c'停止:
    
    ```bash
-   mongodb connected!
-   mongodb connected!
    done
    ```
 
@@ -70,5 +68,11 @@
 - body-parser 1.20.1
 - method-override 3.0.0
 - mongoose 5.0.7
+- bcryptjs 2.4.3
+- connect-flash 0.1.1
+- express-session 1.17.1
+- passport 0.4.1
+- passport-facebook 3.0.0
+- passport-local 1.0.0
 
 

@@ -45,7 +45,7 @@ db.once('open', () => {
         })
         return Restaurant.insertMany(ownLists)  // 寫入資料庫
       })
-      .then(() => {
+      .then(() => {          //***************/
         console.log('done.')
         process.exit()
       })

@@ -14,9 +14,9 @@ router.get('/register', (req, res) => {
   res.render('register')
 })
 
-router.post('/login', passport.authenticate('local', { // 加入 middleware 驗證 request 登入狀態
+router.post('/login', passport.authenticate('local', {
   successRedirect: '/',
-  failureRedirect: '/users/login'
+  failureRedirect: '/uses/login'
 }))
 
 router.post('/register', (req, res) => {
