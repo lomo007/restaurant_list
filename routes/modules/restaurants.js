@@ -10,8 +10,14 @@ router.get('/new', (req, res) => {
 })
 
 //* req..body 和 restaurant schema屬性依樣 , req.body可以當作參數直接塞給 model.create
+//* 新表單加入userId
 router.post('/', (req, res) => {
-  return Restaurant.create(req.body)   //* 
+  const newForm = []
+  newForm.push(req.body)
+  newForm.forEach((newFormlists, userId) => {
+    newFormlists.userId = req.user._id
+  })
+  return Restaurant.create(newForm)   //* 
     .then(() => res.redirect('/'))
     .catch(error => console.error(error))
 })

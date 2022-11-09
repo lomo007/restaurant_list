@@ -6,18 +6,20 @@ const passport = require('passport')
 const bcrypt = require('bcryptjs') // 引入套件
 const User = require('../../models/user')
 
+
+router.post('/login', passport.authenticate('local', {
+  successRedirect: '/',
+  failureRedirect: '/uses/login',
+  failureMessage: true,
+}))
+
 router.get('/login', (req, res) => {
-  res.render('login')
+  res.render('login', req.flash('loginFail_msg'))
 })
 
 router.get('/register', (req, res) => {
   res.render('register')
 })
-
-router.post('/login', passport.authenticate('local', {
-  successRedirect: '/',
-  failureRedirect: '/uses/login'
-}))
 
 router.post('/register', (req, res) => {
   const { name, email, password, confirmPassword } = req.body

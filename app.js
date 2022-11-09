@@ -21,26 +21,27 @@ let hintError = "查無餐廳, 請重新輸入"
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
 
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(express.static('public'))
+app.use(methodOverride('_method'))
 // 將 session 註冊套件   //req.flash() requires sessions
-// session 要先 -> flash -> req.flash -> usePassport -> routes
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true
 }))
-app.use(bodyParser.urlencoded({ extended: true }))
-app.use(express.static('public'))
-app.use(methodOverride('_method'))
+usePassport(app)
 app.use(flash())
 app.use((req, res, next) => {
   res.locals.isAuthenticated = req.isAuthenticated()
   res.locals.user = req.user
-  res.locals.success_msg = req.flash('success_msg').toString()
-  res.locals.warning_msg = req.flash('warning_msg').toString()
-  res.locals.error = req.flash('error').toString()
+  res.locals.success_msg = req.flash('success_msg')
+  res.locals.warning_msg = req.flash('warning_msg', ' ')
+  res.locals.warning_msg = req.flash('loginFail_msg', ' ')
+
+  //console.log(res.locals.warning_msg)
   next()
 })
-usePassport(app)
 app.use(routes)
 
 app.listen(PORT, () => {
