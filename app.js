@@ -15,31 +15,27 @@ const flash = require('connect-flash')
 const routes = require('./routes')
 require('./config/mongoose')
 
-let hint = "請輸入餐廳、分類"
-let hintError = "查無餐廳, 請重新輸入"
-
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
-
-app.use(bodyParser.urlencoded({ extended: true }))
-app.use(express.static('public'))
-app.use(methodOverride('_method'))
 // 將 session 註冊套件   //req.flash() requires sessions
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true
 }))
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(express.static('public'))
+app.use(methodOverride('_method'))
+
 usePassport(app)
 app.use(flash())
 app.use((req, res, next) => {
   res.locals.isAuthenticated = req.isAuthenticated()
   res.locals.user = req.user
   res.locals.success_msg = req.flash('success_msg')
-  res.locals.warning_msg = req.flash('warning_msg', ' ')
-  res.locals.warning_msg = req.flash('loginFail_msg', ' ')
-
-  //console.log(res.locals.warning_msg)
+  res.locals.warning_msg = req.flash('warning_msg')
+  res.locals.error = req.flash('error')
+  res.locals.errors = req.flash('errors')
   next()
 })
 app.use(routes)

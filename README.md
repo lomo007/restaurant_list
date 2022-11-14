@@ -26,6 +26,11 @@
    ```bash
    cd restaurant_list
    ```
+4. 再輸入 npm install，把node_modules下載回來
+
+   ```bash
+   npm install
+   ```
 
 4. 進入資料夾後，輸入'npm run seed' 載入種子資料:
 
@@ -36,13 +41,14 @@
 5. 若看見'mongodb connected'表示伺服器連線成功。若看見'done'表示種子資料載入成功。
    
    ```bash
+   mongodb connected
    done
    ```
 
-4. 接著輸入'npm run start'執行渲染畫面:
+4. 接著輸入'npm run dev'執行渲染畫面:
 
    ```bash
-   npm run start
+   npm run dev
    ```
 
 5. 若看見"Express is listening on http://localhost:3000"

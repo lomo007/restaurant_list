@@ -13,26 +13,23 @@ module.exports = app => {
   // 設定本地登入策略
   passport.use(new LocalStrategy({
     usernameField: 'email',
-    passwordField: 'password',
     passReqToCallback: true,
   }, (req, email, password, done) => {
     User.findOne({ email })
       .then(user => {
         if (!user) {
-          return done(null, false, req.flash('loginFail_msg', '這個信箱尚未註冊!'))
+          return done(null, false, req.flash('error', 'This email is not registed!'))
         }
         return bcrypt.compare(password, user.password)
           .then(isMatch => {
             if (!isMatch) {
-              return done(null, false, req.flash('loginFail_msg', '信箱或密碼錯誤!'))
+              return done(null, false, req.flash('error', 'Email or Password incorrect.'))
             }
             return done(null, user)
           })
-          .catch(err => done(err))
+          .catch(err => done(err, false))
       })
-      .catch(err => done(err))
   }))
-
 
   passport.use(new FacebookStrategy({
     clientID: process.env.FACEBOOK_ID,
@@ -61,6 +58,6 @@ module.exports = app => {
     User.findById(id)
       .lean()
       .then(user => done(null, user))
-      .catch(err => done(err, null))
+      .catch(error => done(error, null))
   })
 }
