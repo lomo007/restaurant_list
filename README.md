@@ -26,39 +26,44 @@
    ```bash
    cd restaurant_list
    ```
-4. 再輸入 npm install，把node_modules下載回來
+4. 再輸入 npm install，載入node_modules
 
    ```bash
    npm install
    ```
+5. 新增.env檔案輸入環境參數，或是於本地新增:
 
-4. 進入資料夾後，輸入'npm run seed' 載入種子資料:
+   ```bash
+   MONGODB_URI='Your MongoDB Account String'
+   ```
+
+6. 進入資料夾後，輸入'npm run seed' 載入種子資料:
 
    ```bash
    npm run seed
    ```
 
-5. 若看見'mongodb connected'表示伺服器連線成功。若看見'done'表示種子資料載入成功。
+7. 若看見'mongodb connected'表示伺服器連線成功。若看見'done'表示種子資料載入成功。
    
    ```bash
    mongodb connected
    done
    ```
 
-4. 接著輸入'npm run dev'執行渲染畫面:
+8. 接著輸入'npm run dev'執行渲染畫面:
 
    ```bash
    npm run dev
    ```
 
-5. 若看見"Express is listening on http://localhost:3000"
+9. 若看見"Express is listening on http://localhost:3000"
    則代表順利運行打開瀏覽器進入到以下網址:
 
    ```bash
    http://localhost:3000
    ```
 
-6. 若欲暫停使用
+10. 若欲暫停使用
 
    ```bash
    ctrl + c
