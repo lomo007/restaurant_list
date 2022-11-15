@@ -9,15 +9,22 @@ router.get('/new', (req, res) => {
   return res.render('new')
 })
 
-//* req..body 和 restaurant schema屬性依樣 , req.body可以當作參數直接塞給 model.create
-//* 新表單加入userId
+//* 一筆資料 Create 即可
+//* Create 內分項送入可以表單檢查
+//* req..body 和 restaurant schema屬性依樣 , req.body可以當作參數直接塞給 model.create (這種方法 會有不適宜的資料或形式傳入的風險)
 router.post('/', (req, res) => {
-  const newForm = []
-  newForm.push(req.body)
-  newForm.forEach((newFormlists, userId) => {
-    newFormlists.userId = req.user._id
+  return Restaurant.create({
+    name: req.body.name,
+    name_en: req.body.name_en,
+    category: req.body.category,
+    image: req.body.image ? req.body.image : "https://omofood.com/wp-content/uploads/20200711133955_50-900x600.jpg",  //* 沒有圖片就預設吐司
+    location: req.body.location,
+    phone: req.body.phone,
+    google_map: req.body.google_map,
+    rating: req.body.rating ? req.body.rating : 5,
+    description: req.body.description,
+    userId: req.user._id   //* 新表單加入userId
   })
-  return Restaurant.create(newForm)   //* 
     .then(() => res.redirect('/'))
     .catch(error => console.error(error))
 })
@@ -38,12 +45,22 @@ router.get('/:id/edit', (req, res) => {
     .catch(error => console.error(error))
 })
 
-//* Object.assign 將 req.body 和restaurant 合併指派
+//* Object.assign 將 req.body 和 restaurant 合併指派 (這種方法 會有不適宜的資料或形式傳入的風險)
 router.put('/:id', (req, res) => {
   const id = req.params.id
   return Restaurant.findById(id)
     .then((restaurant) => {
-      restaurant = Object.assign(restaurant, req.body)  //*  
+      // restaurant = Object.assign(restaurant, req.body)  //*  
+      restaurant.name = req.body.name
+      restaurant.name_en = req.body.name_en
+      restaurant.category = req.body.category
+      restaurant.image = req.body.image ? req.body.image : "https://omofood.com/wp-content/uploads/20200711133955_50-900x600.jpg"  //* 沒有圖片就預設吐司
+      restaurant.location = req.body.location
+      restaurant.phone = req.body.phone
+      restaurant.google_map = req.body.google_map
+      restaurant.rating = req.body.rating ? req.body.rating : 5
+      restaurant.description = req.body.description
+
       return restaurant.save()
     })
     .then(() => res.redirect(`/restaurants/${id}`))
@@ -53,7 +70,9 @@ router.put('/:id', (req, res) => {
 router.delete('/:id', (req, res) => {
   const id = req.params.id
   return Restaurant.findById(id)
-    .then((restaurant) => restaurant.remove())
+    .then((restaurant) => {
+      return restaurant.remove()  // 預防找不到資料Mongo API回傳null,避免繼續呼叫
+    })
     .then(() => res.redirect('/'))
     .catch(error => console.error(error))
 })

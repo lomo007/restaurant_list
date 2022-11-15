@@ -43,11 +43,13 @@
    npm run seed
    ```
 
-7. 若看見'mongodb connected'表示伺服器連線成功。若看見'done'表示種子資料載入成功。
+7. 若看見'mongodb connected'表示伺服器連線成功。若看見'...done'表示種子資料載入成功。
    
    ```bash
    mongodb connected
-   done
+   categorySeeds done
+   mongodb connected
+   recordSeeds done
    ```
 
 8. 接著輸入'npm run dev'執行渲染畫面:
